@@ -10,16 +10,20 @@ pipeline {
 
         stage('Setup') {
             steps {
-                sh "pip install -r requirements.txt"
+                dir('01-jenkins-basics') { 
+                    sh "pip install -r requirements.txt"
+                }
             }
         }
-        
+
         stage('Test') {
             steps {
-                sh "pytest"
+                dir('01-jenkins-basics') {
+                    sh "pytest"
+                }
             }
         }    
-        
+
         stage('Deployment') {
             input {
                 message "Do you want to proceed further?"
